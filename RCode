@@ -1,0 +1,155 @@
+#Comparison between PWA and Controls in Speech Task
+
+#Speech Task
+#Testing for Main Effect of Group
+SpeechTask_GrpModel <- glmer(Accuracy ~ Group + TrialType + (1| Participant) + (1| Trial), family = binomial, data = Speech_GrpModel)
+SpeechTask_GrpModel_noGroup <- glmer(Accuracy ~ TrialType + (1| Participant) + (1| Trial), family = binomial, data = Speech_GrpModel)
+
+anova(SpeechTask_GrpModel, SpeechTask_GrpModel_noGroup)
+
+
+#Testing for Main Effect of Trial Type
+SpeechTask_GrpModel_noTrialType <- glmer(Accuracy ~ Group + (1| Participant) + (1| Trial), family = binomial, data = Speech_GrpModel)
+
+anova(SpeechTask_GrpModel, SpeechTask_GrpModel_noTrialType)
+
+#Follow-up Contrasts
+
+SpeechTask_Congruent1 <- glmer(Accuracy ~ Group + TrialType + (1| Participant) + (1| Trial), family = binomial, data = Speech_GrpModel)
+SpeechTask_Congruent2 <- glmer(Accuracy ~ Group + (1| Participant) + (1| Trial), family = binomial, data = Speech_GrpModel)
+
+anova(SpeechTask_Congruent1, SpeechTask_Congruent2)
+
+SpeechTask_Incongruent1 <- glmer(Accuracy ~ Group + TrialType + (1| Participant) + (1| Trial), family = binomial, data = Speech_GrpModel)
+SpeechTask_Incongruent2 <- glmer(Accuracy ~ Group + (1| Participant) + (1| Trial), family = binomial, data = Speech_GrpModel)
+
+anova(SpeechTask_Incongruent1, SpeechTask_Incongruent2)
+
+
+#Testing Interaction between Trial Type and Group
+SpeechTask_noInt <- glmer(Accuracy ~ Group * TrialType + (1| Participant) + (1| Trial), family = binomial, data = Speech_GrpModel)
+
+anova(SpeechTask_GrpModel_SpeechTask_noInt)
+
+
+#Gesture
+#Testing for Main Effect of Group
+GestureTask_GrpModel <- glmer(Accuracy ~ Group + TrialType + (1| Participant) + (1| Trial), family = binomial, data = Gesture_GrpModel)
+GestureTask_GrpModel_noGroup <- glmer(Accuracy ~ TrialType + (1| Participant) + (1| Trial), family = binomial, data = Gesture_GrpModel)
+
+anova(GestureTask_GrpModel, GestureTask_GrpModel_noGroup)
+
+
+#Testing for Main Effect of Trial Type
+GestureTask_GrpModel_noTrialType <- glmer(Accuracy ~ Group + (1| Participant) + (1| Trial), family = binomial, data = Gesture_GrpModel)
+
+anova(GestureTask_GrpModel, GestureTask_GrpModel_noTrialType)
+
+#Follow-up Contrasts (Congruent vs Unimodal and Incongruent vs Unimodal)
+
+GestureTask_Congruent1 <- glmer(Accuracy ~ Group + TrialType + (1| Participant) + (1| Trial), family = binomial, data = Gesture_GrpModel)
+GestureTask_Congruent2 <- glmer(Accuracy ~ Group + (1| Participant) + (1| Trial), family = binomial, data = Gesture_GrpModel)
+
+anova(GestureTask_Congruent1, GestureTask_Congruent2)
+
+GestureTask_Incongruent1 <- glmer(Accuracy ~ Group + TrialType + (1| Participant) + (1| Trial), family = binomial, data = Gesture_GrpModel)
+GestureTask_Incongruent2 <- glmer(Accuracy ~ Group + (1| Participant) + (1| Trial), family = binomial, data = Gesture_GrpModel)
+
+anova(GestureTask_Incongruent1, GestureTask_Incongruent2)
+
+
+#Testing Interaction between Trial Type and Group
+GestureTask_noInt <- glmer(Accuracy ~ Group * TrialType + (1| Participant) + (1| Trial), family = binomial, data = Gesture_GrpModel)
+
+anova(GestureTask_GrpModel_GestureTask_noInt)
+
+#Follow-up Contrasts (Congruent vs Unimodal, and Incongruent vs Unimodal)
+GestureTask_Int_Congruent1 <- glmer(Accuracy ~ Group * TrialType + (1| Participant) + (1| Trial), family = binomial, data = Gesture_GrpModel)
+GestureTask_Int_Congruent2 <- glmer(Accuracy ~ Group + TrialType + (1| Participant) + (1| Trial), family = binomial, data = Gesture_GrpModel)
+
+anova(GestureTask_Int_Congruent1)
+anova(GestureTask_Int_Congruent2)
+
+GestureTask_Int_Incongruent1 <- glmer(Accuracy ~ Group * TrialType + (1| Participant) + (1| Trial), family = binomial, data = Gesture_GrpModel)
+GestureTask_Int_Incongruent2 <- glmer(Accuracy ~ Group + TrialType + (1| Participant) + (1| Trial), family = binomial, data = Gesture_GrpModel)
+
+anova(GestureTask_Int_Incongruent1)
+anova(GestureTask_Int_Incongruent2)
+
+#Simple main effects of all three trial types
+GestureTask_SME_Congruent1 <- glmer(Accuracy ~ Group + (1| Participant) + (1| Trial), family = binomial, data = Gesture_GrpModel)
+GestureTask_SME_Congruent2 <- glmer(Accuracy ~ (1| Participant) + (1| Trial), family = binomial, data = Gesture_GrpModel)
+
+anova(GestureTask_SME_Congruent1, GestureTask_SME_Congruent2)
+
+GestureTask_SME_Incongruent1 <- glmer(Accuracy ~ Group + (1| Participant) + (1| Trial), family = binomial, data = Gesture_GrpModel)
+GestureTask_SME_Incongruent2 <- glmer(Accuracy ~ (1| Participant) + (1| Trial), family = binomial, data = Gesture_GrpModel)
+
+anova(GestureTask_SME_Incongruent1, GestureTask_SME_Incongruent2)
+
+GestureTask_SME_Unimodal1 <- glmer(Accuracy ~ Group + (1| Participant) + (1| Trial), family = binomial, data = Gesture_GrpModel)
+GestureTask_SME_Unimodal2 <- glmer(Accuracy ~ (1| Participant) + (1| Trial), family = binomial, data = Gesture_GrpModel)
+
+anova(GestureTask_SME_Unimodal1, GestureTask_SME_Unimodal2)
+
+#The Relationship between Task Performance and Background Scores in PWA
+
+#Speech Task
+#Main Effect of Lexical Semantics
+SpeechTask_LexicalSemantic1 <- glmer(Accuracy ~ LexicalSemantic + TrialType + (1| Participant) + (1| Trial), family = binomial, data = SpeechTask_BackgroundModel)
+SpeechTask_LexicalSemantic2 <- glmer(Accuracy ~ LexicalSemantic + (1| Participant) + (1| Trial), family = binomial, data = SpeechTask_BackgroundModel)
+
+anova(SpeechTask_LexicalSemantic1, SpeechTask_LexicalSemantic2)
+
+#Simple Effects for Lexical Semantics
+SpeechTask_LexicalSemantics_Congruent1 <- glmer(Accuracy ~ LexicalSemantic + (1| Participant) + (1| Trial), family = binomial, data = SpeechTask_BackgroundModel)
+SpeechTask_LexicalSemantics_Congruent2 <- glmer(Accuracy ~ (1| Participant) + (1| Trial), family = binomial, data = SpeechTask_BackgroundModel)
+
+anova(SpeechTask_LexicalSemantics_Congruent1, SpeechTask_LexicalSemantics_Congruent2)
+
+SpeechTask_LexicalSemantics_Incongruent1 <- glmer(Accuracy ~ LexicalSemantic + (1| Participant) + (1| Trial), family = binomial, data = SpeechTask_BackgroundModel)
+SpeechTask_LexicalSemantics_Incongruent2 <- glmer(Accuracy ~ (1| Participant) + (1| Trial), family = binomial, data = SpeechTask_BackgroundModel)
+
+anova(SpeechTask_LexicalSemantics_Incongruent1, SpeechTask_LexicalSemantics_Incongruent2)
+
+SpeechTask_LexicalSemantics_Unimodal1 <- glmer(Accuracy ~ LexicalSemantic + (1| Participant) + (1| Trial), family = binomial, data = SpeechTask_BackgroundModel)
+SpeechTask_LexicalSemantics_Unimodal2 <- glmer(Accuracy ~ (1| Participant) + (1| Trial), family = binomial, data = SpeechTask_BackgroundModel)
+
+anova(SpeechTask_LexicalSemantics_Unimodal1, SpeechTask_LexicalSemantics_Unimodal2)
+
+#Main Effect of Gesture Recognition
+SpeechTask_GestureRecongition1 <- glmer(Accuracy ~ GestureRecongition + TrialType + (1| Participant) + (1| Trial), family = binomial, data = SpeechTask_BackgroundModel)
+SpeechTask_GestureRecongition2 <- glmer(Accuracy ~ GestureRecongition + (1| Participant) + (1| Trial), family = binomial, data = SpeechTask_BackgroundModel)
+
+anova(SpeechTask_GestureRecongition1, SpeechTask_GestureRecongition2)
+
+#Gesture Task
+#Main Effect of Gesture Recognition
+GestureTask_GestureRecongition1 <- glmer(Accuracy ~ GestureRecongition + TrialType + (1| Participant) + (1| Trial), family = binomial, data = GestureTask_BackgroundModel)
+GestureTask_GestureRecongition2 <- glmer(Accuracy ~ GestureRecongition + (1| Participant) + (1| Trial), family = binomial, data = GestureTask_BackgroundModel)
+
+anova(GestureTask_GestureRecongition1, GestureTask_GestureRecongition2)
+
+#Simple Effects for Gesture Recognition
+GestureTask_GestureRecognition_Congruent1 <- glmer(Accuracy ~ GestureRecognition + (1| Participant) + (1| Trial), family = binomial, data = GestureTask_BackgroundModel)
+GestureTask_GestureRecognition_Congruent2 <- glmer(Accuracy ~ (1| Participant) + (1| Trial), family = binomial, data = GestureTask_BackgroundModel)
+
+anova(GestureTask_GestureRecognition_Congruent1, GestureTask_GestureRecognition_Congruent2)
+
+GestureTask_GestureRecognition_Incongruent1 <- glmer(Accuracy ~ GestureRecognition + (1| Participant) + (1| Trial), family = binomial, data = GestureTask_BackgroundModel)
+GestureTask_GestureRecognition_Incongruent2 <- glmer(Accuracy ~ (1| Participant) + (1| Trial), family = binomial, data = GestureTask_BackgroundModel)
+
+anova(GestureTask_GestureRecognition_Incongruent1, GestureTask_GestureRecognition_Incongruent2)
+
+GestureTask_GestureRecognition_Unimodal1 <- glmer(Accuracy ~ GestureRecognition + (1| Participant) + (1| Trial), family = binomial, data = GestureTask_BackgroundModel)
+GestureTask_GestureRecognition_Unimodal2 <- glmer(Accuracy ~ (1| Participant) + (1| Trial), family = binomial, data = GestureTask_BackgroundModel)
+
+anova(GestureTask_GestureRecognition_Unimodal1, GestureTask_GestureRecognition_Unimodal2)
+
+#Main Effect of Lexical Semantics
+GestureTask_LexicalSemantic1 <- glmer(Accuracy ~ LexicalSemantic + TrialType + (1| Participant) + (1| Trial), family = binomial, data = GestureTask_BackgroundModel)
+GestureTask_LexicalSemantic2 <- glmer(Accuracy ~ LexicalSemantic + (1| Participant) + (1| Trial), family = binomial, data = GestureTask_BackgroundModel)
+
+anova(GestureTask_LexicalSemantic1, GestureTask_LexicalSemantic2)
+
+
